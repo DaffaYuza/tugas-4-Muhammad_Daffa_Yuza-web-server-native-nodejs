@@ -1,9 +1,9 @@
 const https = require('https');
 
-const postHandler = {};
+const commentHandler = {};
 
-postHandler.getAllPost = (req, res) => {
-    const url = "https://jsonplaceholder.typicode.com/posts";
+commentHandler.getAllPost = (req, res) => {
+    const url = "https://jsonplaceholder.typicode.com/comments";
 
     // Membuat permintaan HTTP GET ke URL
     https.get(url, (response) => {
@@ -19,16 +19,14 @@ postHandler.getAllPost = (req, res) => {
             // Mengubah key
             const modifiedData = JSON.parse(data).map((post) => ({
                 ...post,
-                postId: post.id,
-                judulPost: post.title,
                 content: post.body,
+    
                 // Menghapus key
                 id: undefined,
-                title: undefined,
                 body: undefined
             }));
 
-            // Mengirim data yang telah dimodifikasi sebagai respons ke client
+            // Mengirim data sebagai respons ke client
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(modifiedData, null, 2));
         });
@@ -40,4 +38,4 @@ postHandler.getAllPost = (req, res) => {
     });
 };
 
-module.exports = postHandler;
+module.exports = commentHandler;
