@@ -5,11 +5,10 @@ const postHandler = {};
 postHandler.getAllPost = (req, res) => {
     const url = "https://jsonplaceholder.typicode.com/posts";
 
-    // Membuat permintaan HTTP GET ke URL
     https.get(url, (response) => {
         let data = '';
 
-        // Mengumpulkan data yang diterima dalam potongan-potongan
+        // Mengumpulkan data yang diterima dalam potongan"
         response.on('data', (chunk) => {
             data += chunk;
         });
@@ -33,7 +32,6 @@ postHandler.getAllPost = (req, res) => {
             res.end(JSON.stringify(modifiedData, null, 2));
         });
     }).on('error', (error) => {
-        // Mengatasi kesalahan jika ada
         console.error(`Error: ${error.message}`);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Internal Server Error');

@@ -6,7 +6,6 @@ postCommentHandler.getAllPost = (req, res) => {
     const postsUrl = "https://jsonplaceholder.typicode.com/posts";
     const commentsUrl = "https://jsonplaceholder.typicode.com/comments";
 
-    // Membuat permintaan HTTP GET untuk daftar postingan
     https.get(postsUrl, (postsResponse) => {
         let postsData = '';
 
@@ -15,7 +14,6 @@ postCommentHandler.getAllPost = (req, res) => {
         });
 
         postsResponse.on('end', () => {
-            // Setelah mendapatkan daftar postingan, kita akan membuat permintaan untuk daftar komentar
             https.get(commentsUrl, (commentsResponse) => {
                 let commentsData = '';
 
@@ -57,12 +55,9 @@ postCommentHandler.getAllPost = (req, res) => {
                                 body: undefined,
                                 id: undefined
                             })), 
-                            
-                            
                         };
                     });
 
-                    // Mengirim data yang telah dimodifikasi sebagai respons JSON ke klien
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(postsWithComments, null, 2));
                 });

@@ -5,11 +5,10 @@ const commentHandler = {};
 commentHandler.getAllPost = (req, res) => {
     const url = "https://jsonplaceholder.typicode.com/comments";
 
-    // Membuat permintaan HTTP GET ke URL
     https.get(url, (response) => {
         let data = '';
 
-        // Mengumpulkan data yang diterima dalam potongan-potongan
+        // Mengumpulkan data yang diterima dalam potongan"
         response.on('data', (chunk) => {
             data += chunk;
         });
@@ -26,12 +25,11 @@ commentHandler.getAllPost = (req, res) => {
                 body: undefined
             }));
 
-            // Mengirim data sebagai respons ke client
+            // Mengirim data yang telah dimodifikasi sebagai respons ke client
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(modifiedData, null, 2));
         });
     }).on('error', (error) => {
-        // Mengatasi kesalahan jika ada
         console.error(`Error: ${error.message}`);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Internal Server Error');
